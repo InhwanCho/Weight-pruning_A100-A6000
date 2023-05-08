@@ -1,12 +1,12 @@
-#env
+## env setting
 ```
-$ docker pull ########
+$ docker pull whdlsghks/a100_a6000:1.0
 $ git clone https://github.com/InhwanCho/Weight-pruning_A100-A6000.git
-$ pip install -r requirements.txt #not updated yet
+$ pip install -r requirements.txt
 $ cd main/
 ```
 
-# to prune M:N Sparsity
+## to prune M:N Sparsity
 ```
 
 # CIFAR100 / ResNet56(only) - default = M:N Sparsity=True
@@ -18,9 +18,10 @@ $ python resnet_training_main.py --MNmode --ONNX=imagenet_res101_pruned.onnx --p
 $ python resnet_training_main.py --MNmode --ONNX=imagenet_res152_pruned.onnx --pretrained=true --arch resnet152
 ```
 
-# to convert onnx to trt_engine
+## to convert onnx to trt_engine
 ```
 # build engine
+# if you are using CIFAR100 put '--CIFAR100' option
 $ python onnx2trt.py --trtFile=$$$$$.trt --onnxFile=$$$$$.onnx --max_batch=256 --Sparsity
 
 # checking the accuracy
@@ -30,7 +31,7 @@ $ python trt_accuracy.py --trtFile=$$$$$.trt
 $ python trt_inference.py --trtFile=$$$$$.trt --batch_size=1 --Sparsity
 ```
 
-# to convert many trt_engine
+## to convert many trt_engine
 ```
 # set the sh file
 $ sed -i -e 's/\r$//' auto_python.sh
