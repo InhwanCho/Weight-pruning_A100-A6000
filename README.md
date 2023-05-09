@@ -1,8 +1,8 @@
-## env setting
+## Env setting
 ```
 $ docker pull whdlsghks/a100_a6000:1.0
 $ git clone https://github.com/InhwanCho/Weight-pruning_A100-A6000.git
-$ pip install -r requirements.txt
+#$ pip install -r requirements.txt
 $ cd main/
 ```
 
@@ -13,9 +13,9 @@ $ cd main/
 $ python Cifar100_train_main.py 
 
 # ImageNet / ResNet(50/101/152...)
-$ python resnet_training_main.py --MNmode --ONNX=imagenet_res50_pruned.onnx --pretrained=true --arch resnet50
-$ python resnet_training_main.py --MNmode --ONNX=imagenet_res101_pruned.onnx --pretrained=true --arch resnet101
-$ python resnet_training_main.py --MNmode --ONNX=imagenet_res152_pruned.onnx --pretrained=true --arch resnet152
+$ python resnet_training_main.py --MNmode --ONNX=$$$$$.onnx --pretrained=true --arch resnet50
+$ python resnet_training_main.py --MNmode --ONNX=$$$$$.onnx --pretrained=true --arch resnet101
+$ python resnet_training_main.py --MNmode --ONNX=$$$$$.onnx --pretrained=true --arch resnet152
 ```
 
 ## to convert onnx to trt_engine
