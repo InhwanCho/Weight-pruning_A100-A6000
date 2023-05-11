@@ -46,11 +46,22 @@ when you measure inference time, you are not supposed to use sh file and you sho
 <summary>table and summary</summary>
 <div markdown="1">
 
+A100 table
 ![캡처](src/a100_imgnet.PNG)
 ![캡처](src/a100_cifar100.PNG)
-![캡처](src/graph.PNG)
+<br>
+<br>
+RTX-A6000 table
 ![캡처](src/a6000_imagenet.PNG)
-![캡처](src/a6000_cifiar100.PNG)
+![캡처](src/a6000_cifar100.PNG)
+<br>
+
+summary graph
+![캡처](src/graph.PNG)
+
+<br>
+
+tf32 table
 ![캡처](src/tf32.PNG)
 
 
