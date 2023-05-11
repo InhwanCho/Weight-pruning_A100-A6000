@@ -43,7 +43,7 @@ when you measure inference time, you are not supposed to use sh file and you sho
 
 
 <details>
-<summary>table and summary</summary>
+<summary>show the tables and summary</summary>
 <div markdown="1">
 
 A100 table
