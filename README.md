@@ -40,3 +40,13 @@ $ vim auto_python.sh
 
 - caution
 when you measure inference time, you are not supposed to use sh file and you should execute `trt_inference.py`file with some break time
+
+
+<details>
+<summary>toggle test</summary>
+<div markdown="1">
+
+hello
+
+</div>
+</details>
