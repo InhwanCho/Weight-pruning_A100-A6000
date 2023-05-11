@@ -43,10 +43,27 @@ when you measure inference time, you are not supposed to use sh file and you sho
 
 
 <details>
-<summary>toggle test</summary>
+<summary>table and summary</summary>
 <div markdown="1">
 
-hello
+<img src="src/a100_imagenet.PNG"  width="700" height="1200">
+<img src="src/a100_cifar100.PNG"  width="700" height="600">
+<img src="src/graph.PNG"  width="800" height="800">
+
+<img src="src/a6000_imagenet.PNG"  width="700" height="1200">
+<img src="src/a6000_cifar100.PNG"  width="700" height="600">
+
+<img src="src/tf32.PNG"  width="700" height="800">
+
+
+</div>
+</details>
+
+<details>
+<summary>link in detail</summary>
+<div markdown="1">
+
+https://www.notion.so/keti-via/NPU-Weight-pruning-A100-A6000-Latency-2518e742b26e47e88b79ed9abac98166
 
 </div>
 </details>
