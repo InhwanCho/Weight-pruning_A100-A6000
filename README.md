@@ -45,6 +45,7 @@ when you measure inference time, you are not supposed to use sh file and you sho
 <details>
 <summary>table and summary</summary>
 <div markdown="1">
+
 ![캡처](src/a100_imgnet.PNG)
 ![캡처](src/a100_cifar100.PNG)
 ![캡처](src/graph.PNG)
@@ -56,11 +57,4 @@ when you measure inference time, you are not supposed to use sh file and you sho
 </div>
 </details>
 
-<details>
-<summary>link in detail</summary>
-<div markdown="1">
-
-https://www.notion.so/keti-via/NPU-Weight-pruning-A100-A6000-Latency-2518e742b26e47e88b79ed9abac98166
-
-</div>
-</details>
+[link in detail] : <https://www.notion.so/keti-via/NPU-Weight-pruning-A100-A6000-Latency-2518e742b26e47e88b79ed9abac98166>
