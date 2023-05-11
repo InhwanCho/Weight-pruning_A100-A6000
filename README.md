@@ -45,15 +45,12 @@ when you measure inference time, you are not supposed to use sh file and you sho
 <details>
 <summary>table and summary</summary>
 <div markdown="1">
-
-<img src="src/a100_imagenet.PNG"  width="700" height="1200">
-<img src="src/a100_cifar100.PNG"  width="700" height="600">
-<img src="src/graph.PNG"  width="800" height="800">
-
-<img src="src/a6000_imagenet.PNG"  width="700" height="1200">
-<img src="src/a6000_cifar100.PNG"  width="700" height="600">
-
-<img src="src/tf32.PNG"  width="700" height="800">
+![캡처](src/a100_imgnet.PNG)
+![캡처](src/a100_cifar100.PNG)
+![캡처](src/graph.PNG)
+![캡처](src/a6000_imagenet.PNG)
+![캡처](src/a6000_cifiar100.PNG)
+![캡처](src/tf32.PNG)
 
 
 </div>
