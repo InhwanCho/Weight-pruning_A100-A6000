@@ -1,4 +1,4 @@
 
 # IntelliJ project files
-.idea
+*.idea
 .idea/*.xml
