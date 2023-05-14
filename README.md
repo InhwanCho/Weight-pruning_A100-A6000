@@ -48,6 +48,18 @@ $ sed -i -e 's/\r$//' auto_python.sh
 $ vim auto_python.sh
 ```
 
+## Usage for onnx2trt & trtaccuracy & trtinference
+```
+    python onnx2trt.py [--trtFile trtfile] [--onnxFile onnxfile]
+             [--pthFile pthfile] [--batch_size batchsize_for_inference]
+             [--opt_batch optimal_batchsize_for_set_trtengine_shaep]
+             [--maxbatch max_batchsize_for_set_trtengine_shaep]
+             [--Sparsity] # Sparsity Enable option default=True
+             [--NotUseFP16Mode] # Convert TF32 to FP16
+             [--CIFAR100] # dataset=CIFAR100/ default = IMAGENET
+```
+
+
 - caution
 when you measure inference time, you are not supposed to use sh file and you should execute `trt_inference.py`file with some break time
 
