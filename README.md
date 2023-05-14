@@ -1,12 +1,22 @@
-## Env setting
+# Getting Started
+
+To get started with weight_pruning_A100-A6000, follow these steps.
+
+## Step 1.Install Dependencies
+
 ```
 $ docker pull whdlsghks/a100_a6000:1.0
 $ git clone https://github.com/InhwanCho/Weight-pruning_A100-A6000.git
-#$ pip install -r requirements.txt
 $ cd main/
+
+#or
+$ git clone https://github.com/InhwanCho/Weight-pruning_A100-A6000.git
+$ cd main/
+$ docker pull nvidia...
+$ pip install -r requirements.txt
 ```
 
-## to prune M:N Sparsity
+## Step 2. Pruning M:N Sparsity
 ```
 
 # CIFAR100 / ResNet56(only) - default = M:N Sparsity=True
@@ -18,7 +28,7 @@ $ python resnet_training_main.py --MNmode --ONNX=$$$$$.onnx --pretrained=true --
 $ python resnet_training_main.py --MNmode --ONNX=$$$$$.onnx --pretrained=true --arch resnet152
 ```
 
-## to convert onnx to trt_engine
+## Step 3. Converting onnx to trt_engine
 ```
 # build engine
 # if you are using CIFAR100 put '--CIFAR100' option
@@ -33,7 +43,7 @@ $ python trt_inference.py --trtFile=$$$$$.trt --batch_size=1 --Sparsity
 
 ## to convert many trt_engine
 ```
-# set the sh file
+# set the sh file(sample)
 $ sed -i -e 's/\r$//' auto_python.sh
 $ vim auto_python.sh
 ```
@@ -43,7 +53,7 @@ when you measure inference time, you are not supposed to use sh file and you sho
 
 
 <details>
-<summary>show the tables and summary</summary>
+<summary>show the result tables and summary</summary>
 <div markdown="1">
 
 A100 table
