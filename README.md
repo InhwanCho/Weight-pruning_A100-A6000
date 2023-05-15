@@ -93,7 +93,9 @@ RTX-A6000 table
 <details>
 <summary>#FP16 Summary#</summary>
 <div markdown="1">
+FP16 graph    
 ![캡처](src/graph.PNG)
+    
 <br>    
 - Summary(line chart, FP16)
 - GPU(A100, A6000)별, batch_size에 따른 trt engine의 추론 속도 차이[위]/변화율[아래]
