@@ -75,7 +75,7 @@ when you have CUDA version matching error, please import torch after import tens
 <br>
 
 <details>
-<summary>###show the FP16 result tables###</summary>
+<summary>### show the FP16 result tables ###</summary>
 <div markdown="1">
 
 A100 table
@@ -92,12 +92,9 @@ RTX-A6000 table
 </details>
 
 <details>
-<summary>###FP16 Summary###</summary>
+<summary>### FP16 Summary ###</summary>
 <div markdown="1">
-Summary graph(line chart, FP16) <br>
 
-    
-<br>    
 
 - GPU(A100, A6000)별, batch_size에 따른 trt engine의 추론 속도 차이[위]/변화율[아래]<br>
 - 각 실험 당 optimal_batch를 지정하여 engine을 만들어서 실험을 진행<br>
@@ -118,10 +115,8 @@ Summary graph(line chart, FP16) <br>
 
 
 <details>
-<summary>###TF32 Summary###</summary>
+<summary>### TF32 Summary ###</summary>
 <div markdown="1">
-
-Summary(line chart, TF32)
 
 ResNet152(ImageNet)에서만 실험(FP16에서 시간 차이가 가장 컸기때문에)<br>
 TF32모드에서는 A100에서는 inference time의 증가가 거의 없고, <br>
