@@ -71,7 +71,8 @@ $ vim auto_python.sh
 when you measure inference time, you are not supposed to use sh file and you should execute `trt_inference.py`file with some break time
 <br>
 when you have CUDA version matching error, please import torch after import tensorrt(build/ load engine first)
-
+<br>
+<br>
 
 <details>
 <summary>#show the result tables and summary#</summary>
@@ -93,23 +94,23 @@ RTX-A6000 table
 <details>
 <summary>#FP16 Summary#</summary>
 <div markdown="1">
-FP16 graph    
+Summary graph(line chart, FP16) <br>
 ![캡처](src/graph.PNG)
     
 <br>    
-- Summary(line chart, FP16)
-- GPU(A100, A6000)별, batch_size에 따른 trt engine의 추론 속도 차이[위]/변화율[아래]
-- 각 실험 당 optimal_batch를 지정하여 engine을 만들어서 실험을 진행
-(각 실험 당 1개의 trt_file 생성)
-- ResNet56은 CIFAR-100 dataset을 사용.
-추론 속도가 batch=256 이여도 빠르기 때문인지, 추론 속도가 batch=1에서만 약 8% 증가
-- ResNet50, 101, 152는 ImageNet을 사용하였고,
-Set Sparsity weight = True 하였을 때 전반적으로 속도가 감소.
-[위의 2개의 그래프 A100, 6000 / inference time by batch size]
-- ResNet50, 101, 152는 batch=1에서는 증가율이 적으나, 
-batch=16 이상의 경우 일반적으로 높은 증가율을 보임
-[아래 2개의 그래프 A100, 6000 / speed increase rate]
-summary graph
+
+GPU(A100, A6000)별, batch_size에 따른 trt engine의 추론 속도 차이[위]/변화율[아래]<br>
+각 실험 당 optimal_batch를 지정하여 engine을 만들어서 실험을 진행<br>
+(각 실험 당 1개의 trt_file 생성)<br>
+ResNet56은 CIFAR-100 dataset을 사용.<br>
+추론 속도가 batch=256 이여도 빠르기 때문인지, 추론 속도가 batch=1에서만 약 8% 증가<br>
+ResNet50, 101, 152는 ImageNet을 사용하였고,<br>
+Set Sparsity weight = True 하였을 때 전반적으로 속도가 감소.<br>
+[위의 2개의 그래프 A100, 6000 / inference time by batch size]<br>
+ResNet50, 101, 152는 batch=1에서는 증가율이 적으나, <br>
+batch=16 이상의 경우 일반적으로 높은 증가율을 보임<br>
+[아래 2개의 그래프 A100, 6000 / speed increase rate]<br>
+
 
 </div>
 </details>
