@@ -69,6 +69,8 @@ $ vim auto_python.sh
 
 - caution
 when you measure inference time, you are not supposed to use sh file and you should execute `trt_inference.py`file with some break time
+<br>
+when you have CUDA version matching error, please import torch after import tensorrt(build/ load engine first)
 
 
 <details>
