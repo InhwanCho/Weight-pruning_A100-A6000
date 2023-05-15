@@ -6,13 +6,16 @@ To get started with weight_pruning_A100-A6000, follow these steps.
 
 ```
 $ docker pull whdlsghks/a100_a6000:1.0
+#$ docker run ...
 $ git clone https://github.com/InhwanCho/Weight-pruning_A100-A6000.git
 $ cd main/
 
-#or
+# or
+
 $ git clone https://github.com/InhwanCho/Weight-pruning_A100-A6000.git
 $ cd main/
-$ docker pull nvidia...
+$ docker pull nvcr.io/nvidia/tensorrt:23.03-py3
+#$ docker run ...
 $ pip install -r requirements.txt
 ```
 
@@ -116,7 +119,6 @@ M:N sparsity Technical blog, NVIDIA 공식 문서 1,공식 문서 2
 - NM-sparsity/ trt엔진 상세 분석/ 논문리뷰
 
 [TensorRT 코드 참고](https://github.com/aojunzz/NM-sparsity)
-
     
 [TensorRT 분석](https://velog.io/@sjj995/TensorRT-Polygraphy를-활용하여-간단하게-trt-engine-추론-과정-알아보기)
 
