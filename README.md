@@ -90,4 +90,40 @@ tf32 table
 </div>
 </details>
 
-[link in detail] : <https://www.notion.so/keti-via/NPU-Weight-pruning-A100-A6000-Latency-2518e742b26e47e88b79ed9abac98166>
+<details>
+<summary>Refence</summary>
+<div markdown="1">
+    
+[link in detail](https://www.notion.so/keti-via/NPU-Weight-pruning-A100-A6000-Latency-2518e742b26e47e88b79ed9abac98166)
+
+ref
+M:N sparsity Technical blog, NVIDIA 공식 문서 1,공식 문서 2
+
+[Accelerating Inference with Sparsity Using the NVIDIA Ampere Architecture and NVIDIA TensorRT | NVIDIA Technical Blog](https://developer.nvidia.com/blog/accelerating-inference-with-sparsity-using-ampere-and-tensorrt/)
+
+[Abstract](https://docs.nvidia.com/deeplearning/tensorrt/api/index.html)
+
+[IExecutionContext — NVIDIA TensorRT Standard Python API Documentation 8.6.0 documentation](https://docs.nvidia.com/deeplearning/tensorrt/api/python_api/infer/Core/ExecutionContext.html#tensorrt.IExecutionContext.execute_async_v3)
+
+TensorRT 추론 과정(상세)
+
+[TensorRT Polygraphy를 활용하여 간단하게 trt engine 추론 과정 알아보기](https://velog.io/@sjj995/TensorRT-Polygraphy를-활용하여-간단하게-trt-engine-추론-과정-알아보기)
+
+TensorRT, 최신 버전 TensorRT 예제(상세), MN spartsity(pruning)
+
+[https://github.com/NVIDIA/TensorRT](https://github.com/NVIDIA/TensorRT)
+
+[https://github.com/NVIDIA/trt-samples-for-hackathon-cn](https://github.com/NVIDIA/trt-samples-for-hackathon-cn)
+
+[https://github.com/NVIDIA/apex](https://github.com/NVIDIA/apex)
+
+NM-sparsity(원본 코드 참고 용- Nvidia ASP prune along channel dimensions, our original method prune alone kernel dimensions)
+
+[https://github.com/aojunzz/NM-sparsity](https://github.com/aojunzz/NM-sparsity)
+
+Acceleration sparse DNN 논문 리뷰
+
+[[리뷰] Accelerating Sparse Deep Neural Networks](https://moon-walker.medium.com/리뷰-accelerating-sparse-deep-neural-networks-870b88c0e2bc)
+    
+</div>
+</details>
