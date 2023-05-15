@@ -91,7 +91,7 @@ tf32 table
 </details>
 
 <details>
-<summary>### Refence</summary>
+<summary>### Refences ###</summary>
 <div markdown="1">
     
 [Notion link in detail](https://www.notion.so/keti-via/NPU-Weight-pruning-A100-A6000-Latency-2518e742b26e47e88b79ed9abac98166)
@@ -104,7 +104,6 @@ M:N sparsity Technical blog, NVIDIA 공식 문서 1,공식 문서 2
 
 [IExecutionContext — NVIDIA TensorRT Standard Python API Documentation 8.6.0 documentation](https://docs.nvidia.com/deeplearning/tensorrt/api/python_api/infer/Core/ExecutionContext.html#tensorrt.IExecutionContext.execute_async_v3)
 
-[TensorRT 분석](https://velog.io/@sjj995/TensorRT-Polygraphy를-활용하여-간단하게-trt-engine-추론-과정-알아보기)
 
 - 코드 참고용 tnsorRT, 최신 버전 TensorRT 예제, MN spartsity(pruning)
 
@@ -114,10 +113,12 @@ M:N sparsity Technical blog, NVIDIA 공식 문서 1,공식 문서 2
 
 [NVIDIA/apex](https://github.com/NVIDIA/apex)
 
-NM-sparsity
+- NM-sparsity/ trt엔진 상세 분석/ 논문리뷰
 
 [TensorRT 코드 참고](https://github.com/aojunzz/NM-sparsity)
 
+    
+[TensorRT 분석](https://velog.io/@sjj995/TensorRT-Polygraphy를-활용하여-간단하게-trt-engine-추론-과정-알아보기)
 
 [Acceleration sparse DNN 논문 리뷰](https://moon-walker.medium.com/리뷰-accelerating-sparse-deep-neural-networks-870b88c0e2bc)
     
