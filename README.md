@@ -21,14 +21,18 @@ $ pip install -r requirements.txt
 
 ## Step 2. Pruning M:N Sparsity
 ```
+# please change the folder&file_name first
+# origin code : [https://github.com/pytorch/examples/tree/main/imagenet]
 
-# CIFAR100 / ResNet56(only) - default = M:N Sparsity=True
 $ python Cifar100_train_main.py 
 
 # ImageNet / ResNet(50/101/152...)
 $ python resnet_training_main.py --MNmode --ONNX=$$$$$.onnx --pretrained=true --arch resnet50
 $ python resnet_training_main.py --MNmode --ONNX=$$$$$.onnx --pretrained=true --arch resnet101
 $ python resnet_training_main.py --MNmode --ONNX=$$$$$.onnx --pretrained=true --arch resnet152
+
+#CIFAR100 / ResNet56(only)
+$ python CIFAR100_training_main.py
 ```
 
 ## Step 3. Converting onnx to trt_engine
@@ -44,7 +48,7 @@ $ python trt_accuracy.py --trtFile=$$$$$.trt
 $ python trt_inference.py --trtFile=$$$$$.trt --batch_size=1 --Sparsity
 ```
 
-## to convert many trt_engine
+### to convert many trt_engine
 ```
 # set the sh file(sample)
 $ sed -i -e 's/\r$//' auto_python.sh
