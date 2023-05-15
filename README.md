@@ -101,32 +101,22 @@ batch=16 이상의 경우 일반적으로 높은 증가율을 보임
 summary graph
 ![캡처](src/graph.PNG)
 
-<br>
-### Summary(line chart, TF32)
+</div>
+</details>
+
+<details>
+<summary>TF32</summary>
+<div markdown="1">
+
+Summary(line chart, TF32)
 
 - ResNet152(ImageNet)에서만 실험
 - TF32모드에서는 A100에서는 inference time의 증가가 거의 없고, 
 RTX-A6000에서는 batch_size=1일때만 약 8% 증가
 <br>
 tf32 table
-<br>    
-![캡처](src/tf32.PNG)
-
-
-</div>
-</details>
-
-<details>
-<summary>Result</summary>
-<div markdown="1">
-
-Result
-- CIFAR100-ResNet56 FP16 기준 속도가 약 batch_size=1에서만 8% 빨라지는 것을 확인
-- ImageNet-ResNet 모델은 batch_size에 따라 2%~18% 속도 증가를 확인
-    
-- TensorRT엔진에서 정확도가 파이토치 모델과 유사하게 나오는 것을 확인
 <br>
-
+![캡처](src/tf32.PNG)
 
 </div>
 </details>
