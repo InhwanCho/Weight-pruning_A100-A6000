@@ -86,14 +86,45 @@ RTX-A6000 table
 ![캡처](src/a6000_imagenet.PNG)
 ![캡처](src/a6000_cifar100.PNG)
 <br>
-
+### Summary(line chart, FP16)
+- GPU(A100, A6000)별, batch_size에 따른 trt engine의 추론 속도 차이[위]/변화율[아래]
+- 각 실험 당 optimal_batch를 지정하여 engine을 만들어서 실험을 진행
+(각 실험 당 1개의 trt_file 생성)
+- ResNet56은 CIFAR-100 dataset을 사용.
+추론 속도가 batch=256 이여도 빠르기 때문인지, 추론 속도가 batch=1에서만 약 8% 증가
+- ResNet50, 101, 152는 ImageNet을 사용하였고,
+Set Sparsity weight = True 하였을 때 전반적으로 속도가 감소.
+[위의 2개의 그래프 A100, 6000 / inference time by batch size]
+- ResNet50, 101, 152는 batch=1에서는 증가율이 적으나, 
+batch=16 이상의 경우 일반적으로 높은 증가율을 보임
+[아래 2개의 그래프 A100, 6000 / speed increase rate]
 summary graph
 ![캡처](src/graph.PNG)
 
 <br>
+### Summary(line chart, TF32)
 
+- ResNet152(ImageNet)에서만 실험
+- TF32모드에서는 A100에서는 inference time의 증가가 거의 없고, 
+RTX-A6000에서는 batch_size=1일때만 약 8% 증가
+<br>
 tf32 table
 ![캡처](src/tf32.PNG)
+
+
+</div>
+</details>
+
+<details>
+<summary>Result</summary>
+<div markdown="1">
+
+Result
+- CIFAR100-ResNet56 FP16 기준 속도가 약 batch_size=1에서만 8% 빨라지는 것을 확인
+- ImageNet-ResNet 모델은 batch_size에 따라 2%~18% 속도 증가를 확인
+    
+- TensorRT엔진에서 정확도가 파이토치 모델과 유사하게 나오는 것을 확인
+<br>
 
 
 </div>
