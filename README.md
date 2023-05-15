@@ -109,6 +109,7 @@ summary graph
 RTX-A6000에서는 batch_size=1일때만 약 8% 증가
 <br>
 tf32 table
+<br>    
 ![캡처](src/tf32.PNG)
 
 
