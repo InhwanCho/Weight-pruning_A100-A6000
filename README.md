@@ -2,7 +2,7 @@
 
 To get started with weight_pruning_A100-A6000, follow these steps.
 
-## Step 1.Install Dependencies
+## Step 1. Install Dependencies
 
 ```
 $ docker pull whdlsghks/a100_a6000:1.0
@@ -48,7 +48,7 @@ $ sed -i -e 's/\r$//' auto_python.sh
 $ vim auto_python.sh
 ```
 
-## Usage for onnx2trt & trtaccuracy & trtinference
+## Usage for onnx2trt & trt_accuracy & trt_inference
 ```
     python onnx2trt.py [--trtFile trtfile] [--onnxFile onnxfile]
              [--pthFile pthfile] [--batch_size batchsize_for_inference]
