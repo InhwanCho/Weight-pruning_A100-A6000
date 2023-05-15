@@ -74,7 +74,7 @@ when you have CUDA version matching error, please import torch after import tens
 
 
 <details>
-<summary>show the result tables and summary</summary>
+<summary>#show the result tables and summary#</summary>
 <div markdown="1">
 
 A100 table
@@ -91,7 +91,7 @@ RTX-A6000 table
 </details>
 
 <details>
-<summary>FP16 Summary</summary>
+<summary>#FP16 Summary#</summary>
 <div markdown="1">
 ![캡처](src/graph.PNG)
 <br>    
@@ -112,12 +112,9 @@ summary graph
 </div>
 </details>
 
-<details>
-<summary>### Refences ###</summary>
-<div markdown="1">
 
 <details>
-<summary>TF32 Summary</summary>
+<summary>#TF32 Summary#</summary>
 <div markdown="1">
 
 Summary(line chart, TF32)
