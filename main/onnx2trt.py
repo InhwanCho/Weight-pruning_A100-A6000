@@ -28,11 +28,13 @@ batch_size = args.batch_size
 opt_batch = args.opt_batch
 max_batch = args.max_batch
 # Parse network, rebuild network and do inference in TensorRT ------------------
+#set classes
 logger = trt.Logger(trt.Logger.WARNING)  # create Logger, avaiable level: VERBOSE, INFO, WARNING, ERRROR, INTERNAL_ERROR
 builder = trt.Builder(logger)  # create Builder
 network = builder.create_network(1 << int(trt.NetworkDefinitionCreationFlag.EXPLICIT_BATCH))  # create Network
 profile = builder.create_optimization_profile()  # create Optimization Profile if using Dynamic Shape mode
 config = builder.create_builder_config()  # create BuidlerConfig to set meta data of the network
+
 if Sparsity:
     config.set_flag(trt.BuilderFlag.SPARSE_WEIGHTS)  # for Sparsity option test
     print(f'set Sparsity : {Sparsity}')
@@ -49,6 +51,8 @@ if not os.path.exists(onnxFile):
     print("Failed finding ONNX file!")
     exit()
 print("Succeeded finding ONNX file!")
+
+#parsing onnx
 with open(onnxFile, "rb") as model:
     if not parser.parse(model.read()):
         print("Failed parsing .onnx file!")
@@ -57,12 +61,12 @@ with open(onnxFile, "rb") as model:
         exit()
     print("Succeeded parsing .onnx file!")
 
-# batchsize -1 explicit batch 로 설정하기 때문에
+# batchsize == -1  / explicit batch 로 설정하기 때문에(추론 할 때, batch_size를 유동적으로 변경 가능- 세팅한 범위까지)
 inputTensor = network.get_input(0) # shpae == [-1,3,32,32]
 
 print(list(inputTensor.shape))
 
-# dynamic 일 경우 shape을 여러개의 (batch,1,h,w)로 넣음(onnx의 dynamic_axes옵션 넣어서 batch의 자리를 지정해야함)
+# shape을 여러개의 (batch,1,h,w)로 넣음(onnx의 dynamic_axes옵션 넣어서 batch의 자리를 지정해야함)
 profile.set_shape(inputTensor.name, [1, 3, nHeight, nWidth], [opt_batch, 3, nHeight, nWidth], [max_batch, 3, nHeight, nWidth])#여기에 batch 설정
 print("OptimizationProfile is available? %s" % profile.__nonzero__())
 config.add_optimization_profile(profile)
