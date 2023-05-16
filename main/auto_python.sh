@@ -19,7 +19,7 @@ echo 'never measure the latency using shell script, this one is just sample'
 python trt_inference.py --trtFile=tem_folder/imagenet_res50_pruned.trt --batch_size=32 --Sparsity
 echo 'finish the work'
 #
-#if you need to make lots of trt_engines, samples are blow
+#if you need to make lots of trt_engines, samples are below
 #CUDA_MODULE_LOADING=LAZY python onnx2trt.py --trtFile=tem_folder/imagenet_res152_pruned_1F_TF32.trt --onnxFile=tem_folder/imagenet_res152_pruned.onnx --opt_batch=1 --max_batch=256 --NotUseFP16Mode
 #CUDA_MODULE_LOADING=LAZY python onnx2trt.py --trtFile=tem_folder/imagenet_res152_pruned_16S_TF32.trt --onnxFile=tem_folder/imagenet_res152_pruned.onnx --opt_batch=16 --max_batch=256 --Sparsity --NotUseFP16Mode
 #CUDA_MODULE_LOADING=LAZY python onnx2trt.py --trtFile=tem_folder/imagenet_res152_pruned_16F_TF32.trt --onnxFile=tem_folder/imagenet_res152_pruned.onnx --opt_batch=16 --max_batch=256 --NotUseFP16Mode
