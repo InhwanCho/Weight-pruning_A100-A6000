@@ -101,11 +101,11 @@ def validate(model, test_loader):
         print(f'val_acc : {val_acc}')
         return val_acc
 
-### imagenet
+    
+### ImageNet
 import torchvision
 import torchvision.transforms as transforms
 
-######## ImageNet
 valdir = '/home/keti/workspace/Dataset/imagenet/ILSVRC2012_img_val'
 workers = 4
 val_sampler = None
