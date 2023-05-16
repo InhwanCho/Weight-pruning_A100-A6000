@@ -17,6 +17,11 @@ $ cd main/
 $ docker pull nvcr.io/nvidia/tensorrt:23.03-py3
 #$ docker run ...
 $ pip install -r requirements.txt
+
+# to test the environment is on set it, just execute below codes(but takes ~2 hours)
+$ pwd#currunt directory : ...///main
+$ sed -i -e 's/\r$//' auto_python.sh
+$ sh auto_python.sh
 ```
 
 ## Step 2. Pruning M:N Sparsity
