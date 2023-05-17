@@ -77,6 +77,7 @@ if engineString == None:
     print("Failed building engine!")
     exit()
 print(f"Succeeded building engine!, Sparsity : {Sparsity}, opt_batch : {opt_batch}, max_batch : {max_batch}")
+
 with open(trtFile, "wb") as f:  # create engine
     f.write(engineString)
 

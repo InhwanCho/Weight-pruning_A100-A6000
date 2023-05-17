@@ -8,15 +8,15 @@ python resnet_training_main.py --MNmode --ONNX=imagenet_res50_pruned.onnx --pret
 #
 echo 'start to build trt_engine(onnx to trt)'
 # build trt engine should set (optimal batch_size),(max_batch),(sparsity)
-python onnx2trt.py --trtFile=tem_folder/imagenet_res50_pruned.trt --onnxFile=tem_folder/imagenet_res50_pruned.onnx --opt_batch 32 --max_batch=256 --Sparsity
+python onnx2trt.py --trtFile=./tem_folder/imagenet_res50_pruned.trt --onnxFile=tem_folder/imagenet_res50_pruned.onnx --opt_batch 32 --max_batch 64 --Sparsity
 #
 echo 'testing trt engine accuracy'
-python trt_accuracy.py --trtFile=tem_folder/imagenet_res50_pruned.trt
+python trt_accuracy.py --trtFile=./tem_folder/imagenet_res50_pruned.trt
 #python trt_inference.py --trtFile=tem_folder/imagenet_res50_pruned.trt --batch_size=16 --Sparsity
 #
 echo 'measure the latency using torch event, shoud set the batch_size==opt_batch'
 echo 'never measure the latency using shell script, this one is just sample'
-python trt_inference.py --trtFile=tem_folder/imagenet_res50_pruned.trt --batch_size=32 --Sparsity
+python trt_inference.py --trtFile=./tem_folder/imagenet_res50_pruned.trt --batch_size=32 --Sparsity
 echo 'finish the work'
 #
 #if you need to make lots of trt_engines, samples are below
@@ -29,3 +29,7 @@ echo 'finish the work'
 #CUDA_MODULE_LOADING=LAZY python onnx2trt.py --trtFile=tem_folder/imagenet_res152_pruned_128F_TF32.trt --onnxFile=tem_folder/imagenet_res152_pruned.onnx --opt_batch=128 --max_batch=256 --NotUseFP16Mode
 #CUDA_MODULE_LOADING=LAZY python onnx2trt.py --trtFile=tem_folder/imagenet_res152_pruned_256S_TF32.trt --onnxFile=tem_folder/imagenet_res152_pruned.onnx --opt_batch=256 --max_batch=256 --Sparsity --NotUseFP16Mode
 #CUDA_MODULE_LOADING=LAZY python onnx2trt.py --trtFile=tem_folder/imagenet_res152_pruned_256F_TF32.trt --onnxFile=tem_folder/imagenet_res152_pruned.onnx --opt_batch=256 --max_batch=256 --NotUseFP16Mode
+#
+echo 'checking M:N ratio, pruning ratio'
+python MN_check.py --pthFile=./tem_folder/model_best.pth
+echo 'complete the work'

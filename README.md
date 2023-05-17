@@ -54,6 +54,12 @@ $ python trt_accuracy.py --trtFile=$$$$$.trt
 $ python trt_inference.py --trtFile=$$$$$.trt --batch_size=1 --Sparsity
 ```
 
+## to check M:N ratio/ pruning ratio
+```
+# you must set pthFile path
+$ python MN_check.py --pthFile=./tem_folder/model_best.pth
+```
+
 ### to convert many trt_engine
 ```
 # set the sh file(sample)
@@ -71,6 +77,7 @@ $ vim auto_python.sh
              [--NotUseFP16Mode] # Convert TF32 to FP16
              [--CIFAR100] # dataset=CIFAR100/ default = IMAGENET
 ```
+
 
 
 - caution
