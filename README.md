@@ -19,7 +19,8 @@ $ git clone https://github.com/InhwanCho/Weight-pruning_A100-A6000.git
 $ pip install -r requirements.txt
 $ cd main/
 
-# to test the environment is on set it, just execute below codes(but takes ~2 hours)
+# to verify the environment is on set it, just execute below codes(but takes ~2 hours in case of ImageNet)
+# before to do, set the path of dataset
 $ pwd#currunt directory : ...///main
 $ sed -i -e 's/\r$//' auto_python.sh
 $ sh auto_python.sh
