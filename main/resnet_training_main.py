@@ -1,5 +1,4 @@
 
-
 import argparse
 import os
 import random
@@ -27,7 +26,11 @@ model_names = sorted(name for name in models.__dict__)
 
 parser = argparse.ArgumentParser(description='PyTorch ImageNet Training')
 parser.add_argument('data', metavar='DIR', nargs='?', default='/home/keti/workspace/Dataset/imagenet/',
-                    help='path to dataset')# 폴더 경로
+                    help='path to dataset')# imagenet 폴더 경로
+parser.add_argument('--train_folder', default='ILSVRC2012_img_train', type=str,
+                    help='imagenet training dataset folder') #train dataset folder(imagenet)
+parser.add_argument('--val_folder', default='ILSVRC2012_img_val', type=str,
+                    help='imagenet validation dataset folder') #val dataset folder(imagenet)
 parser.add_argument('-a', '--arch', metavar='ARCH', default='resnet50',
                     choices=model_names,
                     help='model architecture: ' +
@@ -83,6 +86,7 @@ parser.add_argument('--MNmode', action='store_true', help='to start MN pruning')
 parser.add_argument('--ONNX', default='',metavar='PATH',type=str,
                     help='path to save the onnx file (default folder: ./args.savefolder)')
 parser.add_argument('--DP', action='store_true', help='torch.nn.DataParallel(model)')
+
 
 best_acc1 = 0
 
@@ -241,10 +245,10 @@ def main_worker(gpu, ngpus_per_node, args):
         print("=> Dummy data is used!")
         train_dataset = datasets.FakeData(1281167, (3, 224, 224), 1000, transforms.ToTensor())
         val_dataset = datasets.FakeData(50000, (3, 224, 224), 1000, transforms.ToTensor())
-    else: #cifar100
+    else: #imgnet
         print('**********************************')
-        traindir = os.path.join(args.data, 'ILSVRC2012_img_train')
-        valdir = os.path.join(args.data, 'ILSVRC2012_img_val')
+        traindir = os.path.join(args.data, args.train_folder)
+        valdir = os.path.join(args.data, args.val_folder)
         normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406],
                                          std=[0.229, 0.224, 0.225])
 
