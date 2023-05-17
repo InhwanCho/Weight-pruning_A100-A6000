@@ -6,17 +6,18 @@ To get started with weight_pruning_A100-A6000, follow these steps.
 
 ```
 $ docker pull whdlsghks/a100_a6000:1.0
-#$ docker run ...
+#$ docker run -it --gpus all -p 9030:22 --name test10 --ipc host -v /home/keti/:/home/keti/ whdlsghks/a100_a6000:1.0 /bin/bash
 $ git clone https://github.com/InhwanCho/Weight-pruning_A100-A6000.git
 $ cd main/
+# if you use ssh, connect fisrt
+#$ service ssh start
 
 # or
-
-$ git clone https://github.com/InhwanCho/Weight-pruning_A100-A6000.git
-$ cd main/
 $ docker pull nvcr.io/nvidia/tensorrt:23.03-py3
 #$ docker run ...
+$ git clone https://github.com/InhwanCho/Weight-pruning_A100-A6000.git
 $ pip install -r requirements.txt
+$ cd main/
 
 # to test the environment is on set it, just execute below codes(but takes ~2 hours)
 $ pwd#currunt directory : ...///main
