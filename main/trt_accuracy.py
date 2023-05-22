@@ -20,6 +20,7 @@ parser.add_argument('--max_batch', type=int, default=16, help='context max batch
 parser.add_argument('--Sparsity', action='store_true', help='Sparsity Enable option default=True')
 parser.add_argument('--NotUseFP16Mode', action='store_false', help='Convert TF32 to FP16')
 parser.add_argument('--CIFAR100', action='store_true', help='CIFAR100')
+parser.add_argument('--img_path', default='/home/keti/workspace/Dataset/imagenet/ILSVRC2012_img_val',type=str, help='dataset path')
 args = parser.parse_args()
 
 batch_size = args.batch_size
@@ -28,48 +29,72 @@ if args.CIFAR100 :
     nHeight,nWidth = 32,32
 trtFile = args.trtFile
 
-pthFile = args.pthFile
 import_model = torchvision.models.resnet50(weights=None).cuda()#torchvision.models.ResNet50_Weights.DEFAULT).cuda()
-# load = torch.load(pthFile)
-# import_model.load_state_dict(load,strict=False)
+
+if args.pthFile:
+    pthFile = args.pthFile
+    load = torch.load(pthFile)
+    import_model.load_state_dict(load,strict=False)
 criterion = torch.nn.CrossEntropyLoss().to('cuda')
 
 
 
 print('###accuracy testing###')
 
+#trt engine open
 f = open(trtFile, "rb")
 logger = trt.Logger(trt.Logger.WARNING)
-engine = trt.Runtime(logger).deserialize_cuda_engine(f.read()) # create inference Engine using Runtime
-nIO = engine.num_io_tensors # number of input+output = 여기선 2
-lTensorName = [engine.get_tensor_name(i) for i in range(nIO)]  # nIO tensorName을 부여(onnx만들때) 여기선 [x(in),z(out-argmax)]
-nInput = [engine.get_tensor_mode(lTensorName[i]) for i in range(nIO)].count(trt.TensorIOMode.INPUT)#number of input ==> 1
 
-context = engine.create_execution_context() #추론하기 위한 context 클래스 객체 생성
-context.set_input_shape(lTensorName[0], [batch_size, 3, nHeight, nWidth]) # 여기선 input='x'에 대한 shape
+# create inference Engine using Runtime
+engine = trt.Runtime(logger).deserialize_cuda_engine(f.read())
+
+# number of input+output = 여기선 2
+nIO = engine.num_io_tensors
+
+# nIO tensor_Name 부여(onnx 만들때) 여기선 [x(in), z(out-argmax)]
+#torch의 모델 class를 보면 input과 output이 tensor_name으로 부여가 됨
+lTensorName = [engine.get_tensor_name(i) for i in range(nIO)]
+
+#number of input ==> 1 | input = x가 1개이기 때문에 1
+nInput = [engine.get_tensor_mode(lTensorName[i]) for i in range(nIO)].count(trt.TensorIOMode.INPUT)
+
+# 추론을 위한 context 객체 생성
+context = engine.create_execution_context()
+
+# 여기선 input='x'에 대한 shape
+context.set_input_shape(lTensorName[0], [batch_size, 3, nHeight, nWidth])
 
 def run(input_var):
+    #input_var.shape = (batch,3,224,224) imagenet
     input_var = input_var.cpu().detach().numpy()
-    bufferH = []  # prepare the memory buffer on host
+
+    # prepare the memory buffer on host
+    bufferH = []
     bufferH.append(np.ascontiguousarray(input_var))
     for i in range(nInput, nIO):
         bufferH.append(np.empty(context.get_tensor_shape(lTensorName[i]), dtype=trt.nptype(engine.get_tensor_dtype(lTensorName[i]))))
-    bufferD = []# prepare the memory buffer on device
+
+    # prepare the memory buffer on device
+    bufferD = []
     for i in range(nIO):
         bufferD.append(cudart.cudaMalloc(bufferH[i].nbytes)[1])
 
-
-    for i in range(nInput):# copy input data from host buffer into device buffer
+    # copy input data from host buffer into device buffer
+    for i in range(nInput):
         cudart.cudaMemcpy(bufferD[i], bufferH[i].ctypes.data, bufferH[i].nbytes, cudart.cudaMemcpyKind.cudaMemcpyHostToDevice)
 
-    for i in range(nIO):# set address of all input and output data in device buffer
+    # set address of all input and output data in device buffer
+    for i in range(nIO):
         context.set_tensor_address(lTensorName[i], int(bufferD[i]))
 
-    context.execute_async_v3(0) # do inference computation
+    # do inference
+    context.execute_async_v3(0)
 
-    for i in range(nInput, nIO): # copy output data from device buffer into host buffer
+    # copy output data from device buffer into host buffer
+    for i in range(nInput, nIO):
         cudart.cudaMemcpy(bufferH[i].ctypes.data, bufferD[i], bufferH[i].nbytes, cudart.cudaMemcpyKind.cudaMemcpyDeviceToHost)
 
+    # 결과 확인(torch와 과정 동일)
     # print(bufferH[1])
     bufferH[1] = torch.Tensor(bufferH[1])
     pred = torch.max(bufferH[1],1)[-1]
@@ -92,8 +117,10 @@ def validate(model, test_loader):
             val_loss += loss.item()
 
             # accuracy
-
-            predicted = run(input_var).cuda()
+            if args.pthFile:
+                _, predicted = torch.max(output.data, 1)
+            else:    
+                predicted = run(input_var).cuda()
             target_count += target_var.size(0)
             correct_val += (target_var == predicted).sum().item()
             val_acc = 100 * correct_val / target_count
@@ -106,7 +133,7 @@ def validate(model, test_loader):
 import torchvision
 import torchvision.transforms as transforms
 
-valdir = '/home/keti/workspace/Dataset/imagenet/ILSVRC2012_img_val'
+valdir = args.img_path
 workers = 4
 val_sampler = None
 normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406],

@@ -28,13 +28,27 @@ batch_size = args.batch_size
 opt_batch = args.opt_batch
 max_batch = args.max_batch
 # Parse network, rebuild network and do inference in TensorRT ------------------
-#set classes
+
+# set classes to build trt engine
+#logging을 어떻게 활용할 것 인지에 대한 객체
 logger = trt.Logger(trt.Logger.WARNING)  # create Logger, avaiable level: VERBOSE, INFO, WARNING, ERRROR, INTERNAL_ERROR
+
+#network, config와 같은 다른 객체들을 만들어 낼 수 있는 객체. Engine을 빌드의 모든 정보를 가지고 있는 객체
 builder = trt.Builder(logger)  # create Builder
+
+# network에 대한 정보들 (num layers,inputs,outputs)
 network = builder.create_network(1 << int(trt.NetworkDefinitionCreationFlag.EXPLICIT_BATCH))  # create Network
+
+# dynamic batch 설정을 해주는 역할
 profile = builder.create_optimization_profile()  # create Optimization Profile if using Dynamic Shape mode
+
+#int8, tf32, fp16의 설정, sparse_weights 설정을 할 수 있음.
 config = builder.create_builder_config()  # create BuidlerConfig to set meta data of the network
 
+#Onnx 모델을 parsing 해주는 역할
+parser = trt.OnnxParser(network, logger)
+
+#set config
 if Sparsity:
     config.set_flag(trt.BuilderFlag.SPARSE_WEIGHTS)  # for Sparsity option test
     print(f'set Sparsity : {Sparsity}')
@@ -46,13 +60,12 @@ else :
     config.set_flag(trt.BuilderFlag.TF32)
     print('***TF32 Mode***')
 
-parser = trt.OnnxParser(network, logger)
+#parsing onnx
 if not os.path.exists(onnxFile):
     print("Failed finding ONNX file!")
     exit()
 print("Succeeded finding ONNX file!")
 
-#parsing onnx
 with open(onnxFile, "rb") as model:
     if not parser.parse(model.read()):
         print("Failed parsing .onnx file!")
@@ -69,8 +82,11 @@ print(list(inputTensor.shape))
 # shape을 여러개의 (batch,1,h,w)로 넣음(onnx의 dynamic_axes옵션 넣어서 batch의 자리를 지정해야함)
 profile.set_shape(inputTensor.name, [1, 3, nHeight, nWidth], [opt_batch, 3, nHeight, nWidth], [max_batch, 3, nHeight, nWidth])#여기에 batch 설정
 print("OptimizationProfile is available? %s" % profile.__nonzero__())
+
+# config에 profile 정보 넣기
 config.add_optimization_profile(profile)
 
+#엔진 생성
 engineString = builder.build_serialized_network(network, config)  # create a serialized network
 
 if engineString == None:
@@ -78,7 +94,7 @@ if engineString == None:
     exit()
 print(f"Succeeded building engine!, Sparsity : {Sparsity}, opt_batch : {opt_batch}, max_batch : {max_batch}")
 
-with open(trtFile, "wb") as f:  # create engine
+with open(trtFile, "wb") as f:  # create engine file
     f.write(engineString)
 
 #### if forawrd return has another valuse except 'x' we have to set this ones
