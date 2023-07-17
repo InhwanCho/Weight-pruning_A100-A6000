@@ -1,3 +1,12 @@
+GPU(A100, RTX-A6000)에서 M:N weight pruning 후 tensorRT에서 latency 측정 비교입니다.
+<br>
+1. 환경 세팅
+2. 훈련 및 pruning & fine tuning
+3. onnx 변환
+4. tensorRT 변환
+으로 진행하였으며, 제대로 진행되었는지 확인하기 위해
+`pth파일`의 `pruning ratio 및 accuracy 확인`과 `trt엔진` 파일의 `accuracy 확인 및 latency를 측정 비교`하였습니다.
+
 # Getting Started
 
 To get started with weight_pruning_A100-A6000, follow these steps.
